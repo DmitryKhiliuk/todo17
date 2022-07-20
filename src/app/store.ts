@@ -2,12 +2,12 @@ import {TaskActionsType, tasksReducer} from '../features/TodolistsList/tasks-red
 import {TodoListActionsType, todolistsReducer} from '../features/TodolistsList/todolists-reducer';
 import {applyMiddleware, combineReducers, createStore} from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import {AppActionsType, appReducer} from './app-reducer'
+import {appReducer} from './app-reducer'
 import {authReducer} from '../features/Login/auth-reducer'
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {configureStore} from "@reduxjs/toolkit";
 
-export type ActionType = AppActionsType & TodoListActionsType & TaskActionsType
+export type ActionType = TodoListActionsType & TaskActionsType
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
