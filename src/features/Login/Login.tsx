@@ -3,12 +3,13 @@ import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField
 import {useFormik} from 'formik'
 import {useDispatch, useSelector} from 'react-redux'
 import {loginTC} from './auth-reducer'
-import {ActionType, AppDispatch, AppRootStateType} from '../../app/store'
+import {AppDispatch, AppRootStateType} from '../../app/store'
 import {ThunkDispatch} from "redux-thunk";
 import {Navigate} from "react-router-dom";
+import {Action} from "redux";
 
 export const Login = () => {
-    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,ActionType> & AppDispatch>()
+    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
 
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
 

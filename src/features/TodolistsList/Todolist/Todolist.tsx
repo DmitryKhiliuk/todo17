@@ -9,7 +9,8 @@ import {FilterValuesType, TodolistDomainType} from '../todolists-reducer'
 import {useDispatch} from 'react-redux'
 import {fetchTasksTC} from '../tasks-reducer'
 import {ThunkDispatch} from "redux-thunk";
-import {ActionType, AppDispatch, AppRootStateType} from "../../../app/store";
+import {AppDispatch, AppRootStateType} from "../../../app/store";
+import {Action} from "redux";
 
 type PropsType = {
     todolist: TodolistDomainType
@@ -27,7 +28,7 @@ type PropsType = {
 export const Todolist = React.memo(function ({demo = false, ...props}: PropsType) {
     console.log('Todolist called')
 
-    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,ActionType> & AppDispatch>()
+    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
     useEffect(() => {
         if (demo) {
             return
@@ -70,7 +71,7 @@ export const Todolist = React.memo(function ({demo = false, ...props}: PropsType
         <AddItemForm addItem={addTask} disabled={props.todolist.entityStatus === 'loading'}/>
         <div>
             {
-                tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={props.todolist.id}
+                tasksForTodolist && tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={props.todolist.id}
                                                 removeTask={props.removeTask}
                                                 changeTaskTitle={props.changeTaskTitle}
                                                 changeTaskStatus={props.changeTaskStatus}

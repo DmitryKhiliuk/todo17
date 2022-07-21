@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {ActionType, AppDispatch, AppRootStateType} from '../../app/store'
+import {AppDispatch, AppRootStateType} from '../../app/store'
 import {
     addTodolistTC,
     changeTodolistFilterAC,
@@ -17,6 +17,7 @@ import {AddItemForm} from '../../components/AddItemForm/AddItemForm'
 import {Todolist} from './Todolist/Todolist'
 import { Navigate } from 'react-router-dom'
 import {ThunkDispatch} from "redux-thunk";
+import {Action} from "redux";
 
 type PropsType = {
     demo?: boolean
@@ -27,7 +28,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
-    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,ActionType> & AppDispatch>()
+    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
 
     useEffect(() => {
         if (demo || !isLoggedIn) {
@@ -87,7 +88,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         </Grid>
         <Grid container spacing={3}>
             {
-                todolists.map(tl => {
+                todolists && todolists.map(tl => {
                     let allTodolistTasks = tasks[tl.id]
 
                     return <Grid item key={tl.id}>

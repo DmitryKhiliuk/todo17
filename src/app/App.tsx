@@ -14,12 +14,13 @@ import {Menu} from '@material-ui/icons'
 import {TodolistsList} from '../features/TodolistsList/TodolistsList'
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
 import {useDispatch, useSelector} from 'react-redux'
-import {ActionType, AppDispatch, AppRootStateType} from './store'
+import {AppDispatch, AppRootStateType} from './store'
 import {initializeAppTC, RequestStatusType} from './app-reducer'
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 import {Login} from '../features/Login/Login'
 import {logoutTC} from '../features/Login/auth-reducer'
 import {ThunkDispatch} from "redux-thunk";
+import {Action} from "redux";
 
 type PropsType = {
     demo?: boolean
@@ -29,7 +30,7 @@ function App({demo = false}: PropsType) {
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,ActionType> & AppDispatch>()
+    const dispatch = useDispatch<ThunkDispatch<AppRootStateType,unknown,Action> & AppDispatch>()
 
     useEffect(() => {
         dispatch(initializeAppTC())
